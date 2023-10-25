@@ -2,6 +2,12 @@
   font-family: "Roboto", sans-serif;
 }
 
+.wrapper {
+  max-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
 .header {
   display: -webkit-box;
   display: -webkit-flex;
