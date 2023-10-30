@@ -1,4 +1,4 @@
-'use strict'
+// 'use strict'
 
 // =====Первая домашняя работа=====
 
@@ -241,10 +241,6 @@
 
 // =====Пятая домашняя работа=====
 
-// const x = [] + false - null + true;
-
-// =====Пятая домашняя работа=====
-
 // const adv = document.querySelectorAll('.promo__adv img'),
 //     poster = document.querySelector('.promo__bg'),
 //     genreName = poster.querySelector('.promo__genre'),
@@ -285,3 +281,79 @@
 // //     </li>
 // //     `
 // // });
+
+// =====Шестая домашняя работа=====
+
+const adv = document.querySelectorAll('.promo__adv img'),
+  poster = document.querySelector('.promo__bg'),
+  genreName = poster.querySelector('.promo__genre'),
+  form = document.querySelector('.add'),
+  input = form.querySelector('.adding__input'),
+  send = form.querySelector('button'),
+  checkbox = form.querySelector('[type="checkbox"]'),
+  filmList = document.querySelector('.promo__interactive-list'),
+  deleteCan = document.querySelectorAll('.delete'),
+  updateMovies = function (parent, films) {
+    parent.innerHTML = null;
+    films.forEach((name, i) => {
+      parent.innerHTML += `
+      <li class="promo__interactive-item">${i + 1} ${name}
+              <div class="delete"></div>
+      </li>
+      `;
+    });
+    parent.addEventListener('click', e => {
+      if(e.target.classList.contains('delete')) {
+        e.target.parentElement.remove();
+      }
+    })
+  },
+  removeAdv = (trash) => {
+    trash.forEach(e => {
+      e.remove()
+    })
+  },
+  addChange = () => {
+    genreName.textContent = 'драма';
+
+    poster.style.background = 'url(../img/bg.jpg)';
+  },
+  sorting = (arr) => {
+    arr.sort()
+  },
+  movieDB = {
+    movies: [
+      "Логан",
+      "Лига справедливости",
+      "Ла-ла лэнд",
+      "Одержимость",
+      "Скотт Пилигрим против..."
+    ]
+  },
+  { movies } = movieDB;
+
+form.addEventListener('submit', e => {
+  e.preventDefault()
+  let resultAnswer = input.value;
+  if (resultAnswer > 21) {
+    resultAnswer = `${resultAnswer.splice(0, 21)}...`
+  }
+  if (resultAnswer) {
+    movies.push(resultAnswer)
+    sorting(movies)
+    updateMovies(filmList, movies)
+  } else {
+    alert('Вы ввели неверное значение')
+  }
+  if (checkbox.checked && resultAnswer) {
+    alert(`Добавляем любимый фильм ${resultAnswer}`)
+  }
+  e.target.reset()
+})
+
+sorting(movies);
+removeAdv(adv);
+addChange();
+updateMovies(filmList, movies);
+
+// =====Седьмая домашняя работа=====
